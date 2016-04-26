@@ -15,11 +15,7 @@ public class EnemyScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (BattlefieldScript.Instance.result_btn.gameObject.activeSelf) {
-			gameObject.SetActive (false);
-			transform.GetComponent<Animation> ().Stop ();
-			alive = false;
-		}
+
 	}
 
 	public void Init()

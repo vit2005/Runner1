@@ -49,8 +49,16 @@
      <Compile Include="Assets\Scripts\View\BattlefieldScript.cs" />
      <Compile Include="Assets\Scripts\View\CenterlizeScript.cs" />
      <Compile Include="Assets\Scripts\View\EnemyScript.cs" />
+     <Compile Include="Assets\Scripts\View\IDefaultWindow.cs" />
+     <Compile Include="Assets\Scripts\View\InfoScript.cs" />
+     <Compile Include="Assets\Scripts\View\LadderScript.cs" />
+     <Compile Include="Assets\Scripts\View\MenuScript.cs" />
+     <Compile Include="Assets\Scripts\View\OptionsScript.cs" />
      <Compile Include="Assets\Scripts\View\PlayerScript.cs" />
      <Compile Include="Assets\Scripts\View\ResizeScript.cs" />
+     <Compile Include="Assets\Scripts\View\ResultScript.cs" />
+     <Compile Include="Assets\Scripts\View\ShopScript.cs" />
+     <Compile Include="Assets\Scripts\View\WindowsController.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>E:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

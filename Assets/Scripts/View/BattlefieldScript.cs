@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using System.Timers;
 using System;
 
-public class BattlefieldScript : MonoBehaviour {
+public class BattlefieldScript : IDefaultWindow {
 
 	private static BattlefieldScript _instance;
 	public static BattlefieldScript Instance {get {return _instance;}}
@@ -14,8 +14,6 @@ public class BattlefieldScript : MonoBehaviour {
 	public Button jump_btn;
 	public Button roll_btn;
 	public Button start_btn;
-	public Button result_btn;
-	public Button exit_btn;
 	public Button pause_btn;
 
 	public Text score;
@@ -36,26 +34,23 @@ public class BattlefieldScript : MonoBehaviour {
 		defence_btn.onClick.AddListener (SetDefenceState);
 		jump_btn.onClick.AddListener (SetJumpState);
 		roll_btn.onClick.AddListener (SetRollState);
-		result_btn.onClick.AddListener (() => {
-			result_btn.gameObject.SetActive (false);
-		});
-		exit_btn.onClick.AddListener (Exit);
 		pause_btn.onClick.AddListener (Pause);
 
 		//start_btn.onClick.AddListener (InitTimer);
+
+	}
+
+	public override void InitWindow (string title)
+	{
+		base.InitWindow (title);
 		theTime = Time.time;
 		count = 0;
 		nextEnemySpawn = 3;
 		onPause = false;
 	}
-
-
 	
 	// Update is called once per frame
 	void Update () {
-		if (result_btn.gameObject.activeSelf)
-			return;
-
 		if (onPause)
 			return;
 
@@ -96,11 +91,19 @@ public class BattlefieldScript : MonoBehaviour {
 
 	public void Defeat()
 	{
-		result_btn.transform.FindChild ("Text").GetComponent<Text> ().text = string.Format ("Score: {0}",count);
-		result_btn.gameObject.SetActive (true);
+		ResultScript.Instance.score.text = string.Format ("Score: {0}",count);
+
 		count = 0;
 		nextEnemySpawn = 3;
 		PlayerScript.CurrentState = PlayerState.idle;
+
+		foreach (EnemyScript item in enemies) {
+			item.gameObject.SetActive (false);
+			item.transform.GetComponent<Animation> ().Stop ();
+			item.alive = false;
+		}
+
+		WindowsController.OpenResult ();
 		Debug.Log ("Defeavgt");
 	}
 
@@ -150,10 +153,5 @@ public class BattlefieldScript : MonoBehaviour {
 			Time.timeScale = 1f;
 			onPause = false;
 		}
-	}
-
-	void Exit()
-	{
-		Application.Quit ();
 	}
 }
