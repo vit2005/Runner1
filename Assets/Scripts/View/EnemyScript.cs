@@ -18,6 +18,7 @@ public class EnemyScript : MonoBehaviour {
 		if (BattlefieldScript.Instance.result_btn.gameObject.activeSelf) {
 			gameObject.SetActive (false);
 			transform.GetComponent<Animation> ().Stop ();
+			alive = false;
 		}
 	}
 

@@ -16,8 +16,10 @@ public class BattlefieldScript : MonoBehaviour {
 	public Button start_btn;
 	public Button result_btn;
 	public Button exit_btn;
+	public Button pause_btn;
 
 	public Text score;
+	bool onPause;
 
 	int count;
 
@@ -38,10 +40,13 @@ public class BattlefieldScript : MonoBehaviour {
 			result_btn.gameObject.SetActive (false);
 		});
 		exit_btn.onClick.AddListener (Exit);
+		pause_btn.onClick.AddListener (Pause);
+
 		//start_btn.onClick.AddListener (InitTimer);
 		theTime = Time.time;
 		count = 0;
 		nextEnemySpawn = 3;
+		onPause = false;
 	}
 
 
@@ -51,11 +56,22 @@ public class BattlefieldScript : MonoBehaviour {
 		if (result_btn.gameObject.activeSelf)
 			return;
 
+		if (onPause)
+			return;
+
 		score.text = count.ToString();
 		if(Time.time - theTime > nextEnemySpawn) {
 			theTime = Time.time; 
 			CreateEnemy();
 		}
+
+		if (PlayerScript.CurrentState == PlayerState.idle)
+			timeOfBeginingAnimation = Time.time;
+		else {
+			if (Time.time - timeOfBeginingAnimation > 0.5)
+				PlayerScript.CurrentState = PlayerState.idle;
+		}
+
 	}
 
 	void SetAttackState()
@@ -115,6 +131,25 @@ public class BattlefieldScript : MonoBehaviour {
 		//enemies [0].Init ();
 		Debug.Log ("Enemy intitialized");
 		nextEnemySpawn = 0.5f + (float)rnd.NextDouble ();
+	}
+
+	void Pause()
+	{
+		if (!onPause) {
+			//foreach (EnemyScript e in enemies) {
+			//	if (e.transform.GetComponent<Animation> ().isPlaying)
+			//		e.transform.GetComponent<Animation> ().enabled = false;
+			//}
+			Time.timeScale = 0f;
+			onPause = true;
+		} else {
+			//foreach (EnemyScript e in enemies) {
+			//	if (e.alive)
+			//		e.transform.GetComponent<Animation> ().enabled = true;
+			//}
+			Time.timeScale = 1f;
+			onPause = false;
+		}
 	}
 
 	void Exit()
