@@ -92,6 +92,7 @@ public class BattlefieldScript : IDefaultWindow {
 	public void Defeat()
 	{
 		ResultScript.Instance.score.text = string.Format ("Score: {0}",count);
+		LadderScript.Instance.AddScore (count);
 
 		count = 0;
 		nextEnemySpawn = 3;

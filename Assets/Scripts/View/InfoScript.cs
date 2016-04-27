@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+using System.Collections.Generic;
 
 public class InfoScript : IDefaultWindow {
 
@@ -8,7 +8,7 @@ public class InfoScript : IDefaultWindow {
 	public static InfoScript Instance {get {return _instance;}}
 	
 	public Button Back_btn;
-
+	
 	// Use this for initialization
 	void Start () {
 		_instance = this;
@@ -18,6 +18,6 @@ public class InfoScript : IDefaultWindow {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		
 	}
 }
