@@ -16,6 +16,8 @@ public class BattlefieldScript : IDefaultWindow {
 	public Button start_btn;
 	public Button pause_btn;
 
+	public List<Animation> ground_animations;
+
 	public Text score;
 	bool onPause;
 
@@ -47,6 +49,10 @@ public class BattlefieldScript : IDefaultWindow {
 		count = 0;
 		nextEnemySpawn = 3;
 		onPause = false;
+
+		foreach (Animation a in ground_animations) {
+			a.Play();
+		}
 	}
 	
 	// Update is called once per frame
@@ -102,6 +108,9 @@ public class BattlefieldScript : IDefaultWindow {
 			item.gameObject.SetActive (false);
 			item.transform.GetComponent<Animation> ().Stop ();
 			item.alive = false;
+		}
+		foreach (Animation a in ground_animations) {
+			a.Stop();
 		}
 
 		WindowsController.OpenResult ();

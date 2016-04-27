@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\View\IDefaultWindow.cs" />
      <Compile Include="Assets\Scripts\View\InfoScript.cs" />
      <Compile Include="Assets\Scripts\View\LadderScript.cs" />
+     <Compile Include="Assets\Scripts\View\LoopedAnimation.cs" />
      <Compile Include="Assets\Scripts\View\MenuScript.cs" />
      <Compile Include="Assets\Scripts\View\OptionsScript.cs" />
      <Compile Include="Assets\Scripts\View\PlayerScript.cs" />
